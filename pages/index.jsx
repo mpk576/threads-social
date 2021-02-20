@@ -1,3 +1,3 @@
 export default function Home() {
-  return <h1>Welcome to threads</h1>;
+  return <h1>{process.env.customKey}</h1>;
 }
