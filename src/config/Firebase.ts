@@ -25,7 +25,5 @@ try {
 }
 
 export const auth = firebase.auth();
-export const storage = firebase.storage();
-export const db = firebase.database();
 export const firestore = firebase.firestore();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
