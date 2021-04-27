@@ -10,6 +10,11 @@ export type AuthContextValues = {
   currentUser?: User | null;
   signUp?: (email: string, password: string) => Promise<UserCredential>;
   signIn?: (email: string, password: string) => Promise<UserCredential>;
+  signUpNewUser?: (
+    email: string,
+    password: string,
+    username: string
+  ) => Promise<void>;
   googleLogin?: () => Promise<UserCredential>;
   logOut?: () => Promise<void>;
   addUserInfo?: (user: User) => Promise<void>;
@@ -29,6 +34,15 @@ export function AuthProvider({ children }: AuthProviderProps): ReactElement {
 
   function signUp(email: string, password: string) {
     return auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  function signUpNewUser(email: string, password: string, username: string) {
+    return auth.createUserWithEmailAndPassword(email, password).then((res) => {
+      const user = auth.currentUser;
+      return user.updateProfile({
+        displayName: username,
+      });
+    });
   }
 
   function signIn(email, password) {
@@ -71,6 +85,7 @@ export function AuthProvider({ children }: AuthProviderProps): ReactElement {
   const value: AuthContextValues = {
     currentUser,
     signUp,
+    signUpNewUser,
     signIn,
     googleLogin,
     logOut,

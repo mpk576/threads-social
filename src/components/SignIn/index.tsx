@@ -1,5 +1,6 @@
 import { useState, useRef, ReactElement } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import styles from "./signin.module.scss";
 
 export default function SignIn(): ReactElement {
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +29,7 @@ export default function SignIn(): ReactElement {
   }
 
   return (
-    <section className="sign-in">
+    <section className={styles.siginin}>
       {error && <span className="sign-in__error">{error}</span>}
       <input ref={emailInput} type="email" className="sign-in__email" />
       <input

@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 export default function SignUp(): ReactElement {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { signUp } = useAuth();
+  const { signUp, signUpNewUser } = useAuth();
   const usernameInput = useRef<HTMLInputElement>();
   const emailInput = useRef<HTMLInputElement>();
   const passwordInput = useRef<HTMLInputElement>();
@@ -45,7 +45,7 @@ export default function SignUp(): ReactElement {
       if (validEmail(email)) {
         if (passwordMatch(password, passwordRepeat)) {
           try {
-            await signUp(email, password);
+            await signUpNewUser(email, password, username);
             console.log("success account created");
             setLoading(false);
           } catch (err) {
